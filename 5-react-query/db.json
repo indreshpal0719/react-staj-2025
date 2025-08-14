@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Zafer"
+    },
+    {
+      "id": "2",
+      "name": "Baran"
+    },
+    {
+      "id": "3",
+      "name": "Gökay"
+    }
+  ],
+  "movies": [
+    {
+      "id": "1",
+      "title": "The Shawshank Redemption"
+    },
+    {
+      "id": "2",
+      "title": "The Matrix"
+    },
+    {
+      "id": "3",
+      "title": "The Green Mile"
+    }
+  ]
+}
