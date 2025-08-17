@@ -12,7 +12,7 @@ mkdir -p $TARGET_DIR
 # Her bir component için dosya oluştur ve içine rafce template yaz
 for COMPONENT in "${COMPONENTS[@]}"
 do
-  FILE_PATH="$TARGET_DIR/$COMPONENT.jsx"
+  FILE_PATH="$TARGET_DIR/$COMPONENT.tsx"
   echo "Creating $FILE_PATH"
 
   cat <<EOF > $FILE_PATH
