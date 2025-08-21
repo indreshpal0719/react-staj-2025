@@ -1,31 +1,25 @@
 import { supabase } from "../supabase";
+import type { Product } from "./ProductList";
 
 type Props = {
-  sessionUserId: string | null;
+  product: Product;
   getProducts: () => void;
 };
 
-// rafce
-const ProductAdd = ({ sessionUserId, getProducts }: Props) => {
+const ProductEdit = ({ product, getProducts }: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name");
     const price = formData.get("price");
-    // Henüz kullanıcı giriş yapmadıysa
-    if (sessionUserId === null) {
-      alert("Giriş yap da gel");
-      return;
-    }
     const { error } = await supabase
       .from("products")
-      .insert({
-        user_id: sessionUserId,
+      .update({
         name: name,
         price: Number(price) || 0,
       })
-      .select()
-      .single();
+      .eq("id", product.id);
+
     if (error) {
       return alert(error.message);
     }
@@ -34,24 +28,22 @@ const ProductAdd = ({ sessionUserId, getProducts }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Ürün ekleme</h1>
+    <form className="flex gap-1" onSubmit={handleSubmit}>
       <input
-        type="text"
-        placeholder="Ürün adı"
         name="name"
-        defaultValue={"iPhone"}
+        type="text"
+        className="border"
+        defaultValue={product.name}
       />
       <input
-        type="number"
-        placeholder="Fiyat"
         name="price"
-        defaultValue={"59000"}
+        type="number"
+        className="border"
+        defaultValue={product.price}
       />
-      <br />
-      <button>Ürünü ekle</button>
+      <button className="cursor-pointer">Kaydet</button>
     </form>
   );
 };
 
-export default ProductAdd;
+export default ProductEdit;

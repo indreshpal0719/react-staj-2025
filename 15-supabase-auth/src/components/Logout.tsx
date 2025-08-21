@@ -1,12 +1,17 @@
 import { supabase } from "../supabase";
 
-const Logout = () => {
+type Props = {
+  logout: () => void;
+};
+
+const Logout = ({ logout }: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Kullanıcıyı çıkış ediyoruz
     const { error } = await supabase.auth.signOut();
     console.log(error);
     alert("Çıkış başarılı");
+    logout();
   };
 
   return (
